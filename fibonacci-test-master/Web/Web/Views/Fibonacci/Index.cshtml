@@ -1,0 +1,38 @@
+﻿@model Web.Models.FibonacciViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- TODO: Copied from UI flat file... not implemented -->
+<h2>Display a list of Fibonacci numbers</h2>
+<div class="row">
+    <div class="col-lg-5">
+        @using (Html.BeginForm("GenerateFibonacciSequence", "Fibonacci", FormMethod.Post))
+        {
+            <form role="form">
+                <div class="form-group">
+                    <label for="numbers">Numbers to display:</label>
+                    @Html.TextAreaFor(model => model.NumberRequested, new { @class = "form-control", @id = "numbers" })
+                    @Html.ValidationMessageFor(model => model.NumberRequested)
+                </div>  
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Generate</button>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="well">Results</div>
+        <ul style="list-style:none;padding:0 0 0 5px;">
+            @foreach (var item in Model.Results)
+            {
+                <li>
+                    @item
+                </li>
+            }
+        </ul>
+    </div>
+</div>
