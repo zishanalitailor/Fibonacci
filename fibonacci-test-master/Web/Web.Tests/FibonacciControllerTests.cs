@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Web.Controllers;
 using Web.Models;
+using System.Collections.Generic;
 
 namespace Web.Tests
 {
@@ -29,8 +30,10 @@ namespace Web.Tests
         public void ItShouldReturnFibonacciViewModel()
         {
             var result = GetViewResultFromController();
-
-            Assert.That(result.Model, Is.TypeOf<FibonacciViewModel>());
+            var viewModel = result.Model as FibonacciViewModel;
+            List<int> number = viewModel.Results as List<int>;
+    
+            Assert.That(number[5], Is.EqualTo(5));
         }
     }
 }
